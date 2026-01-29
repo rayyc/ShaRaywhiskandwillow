@@ -1,7 +1,7 @@
 /* 
  * ShaRay Whisk&Willow - Complete Enhanced Stylesheet
  * Modern Luxe Theme with Gold Accents
- * Version: 3.0.0 - Updated for SPA Navigation
+ * Version: 3.0.1 - Desktop Menu Always Visible
  * PART 1 OF 2
  */
 
@@ -1392,38 +1392,49 @@ footer {
         text-align: center;
     }
 
+    /* ====== UPDATED MOBILE MENU - ALWAYS SHOW DESKTOP STYLE ====== */
+    
+    /* HIDE hamburger menu button completely */
     .mobile-menu-toggle {
-        display: flex;
+        display: none !important;
     }
 
+    /* KEEP nav links visible like desktop */
     .nav-links {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100vh;
-        background: rgba(26, 26, 46, 0.98);
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 0;
-        gap: 2.5rem;
-        transition: left 0.3s ease;
-        z-index: 1001;
-        backdrop-filter: blur(10px);
+        display: flex !important;
+        flex-direction: row !important;
+        position: relative !important;
+        width: auto !important;
+        height: auto !important;
+        background: transparent !important;
+        gap: 0.8rem !important;
+        top: auto !important;
+        left: auto !important;
+        backdrop-filter: none !important;
+        padding: 0 !important;
+        z-index: auto !important;
+        transform: none !important;
+        transition: none !important;
     }
 
-    .nav-links.active {
-        left: 0;
+    /* Make nav text smaller to fit on mobile */
+    .nav-links a,
+    .nav-link {
+        font-size: 0.75rem !important;
+        padding: 5px 0 !important;
+        letter-spacing: 0.5px !important;
     }
 
     nav {
-        padding: 0 1.5rem;
+        padding: 0 1rem !important;
+        gap: 0.5rem !important;
     }
 
     .logo-image {
-        height: 40px;
+        height: 35px !important;
     }
+
+    /* ====== END OF MOBILE MENU UPDATE ====== */
 
     h2 {
         font-size: 2.5rem;
@@ -1530,6 +1541,24 @@ footer {
     .footer-content {
         gap: 2rem;
     }
+
+    /* Even smaller nav text on very small screens */
+    .nav-links a,
+    .nav-link {
+        font-size: 0.65rem !important;
+    }
+
+    .nav-links {
+        gap: 0.5rem !important;
+    }
+    
+    nav {
+        padding: 0 0.5rem !important;
+    }
+
+    .logo-image {
+        height: 30px !important;
+    }
 }
 
 /* ==========================================
@@ -1578,13 +1607,13 @@ footer {
     }
 }
 
-/* Menu Open State */
+/* Menu Open State - NO LONGER NEEDED but keeping for compatibility */
 body.menu-open {
-    overflow: hidden;
+    overflow: auto;
 }
 
 body.menu-open header {
-    background: rgba(26, 26, 46, 0.98);
+    background: rgba(26, 26, 46, 0.95);
 }
 
 /* Print Styles */
