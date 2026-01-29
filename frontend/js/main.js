@@ -1,6 +1,6 @@
 /**
  * ShaRay Whisk&Willow - Enhanced JavaScript
- * Version: 3.0.0 - Single Page App with Section Navigation
+ * Version: 3.0.1 - Fixed Mobile Menu Issue
  * Author: Sasha & Ray Charles
  */
 
@@ -121,35 +121,72 @@ function updateActiveNav(activeLink) {
 }
 
 // ==========================================
-// MOBILE MENU
+// MOBILE MENU - FIXED VERSION
 // ==========================================
 function initMobileMenu() {
     const toggle = document.querySelector('.mobile-menu-toggle');
     const navLinks = document.querySelector('.nav-links');
     
-    if (toggle && navLinks) {
-        toggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            navLinks.classList.toggle('active');
-            toggle.classList.toggle('active');
-            document.body.classList.toggle('menu-open');
-        });
+    if (!toggle || !navLinks) {
+        console.error('Mobile menu elements not found');
+        return;
+    }
+    
+    // Toggle menu on button click
+    toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         
-        // Close on outside click
-        document.addEventListener('click', (e) => {
-            if (navLinks.classList.contains('active') && 
-                !navLinks.contains(e.target) && 
-                !toggle.contains(e.target)) {
-                closeMobileMenu();
+        const isActive = navLinks.classList.contains('active');
+        
+        if (isActive) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
+    });
+    
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+        if (navLinks.classList.contains('active') && 
+            !navLinks.contains(e.target) && 
+            !toggle.contains(e.target)) {
+            closeMobileMenu();
+        }
+    });
+    
+    // Close on escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+            closeMobileMenu();
+        }
+    });
+    
+    // Prevent scrolling when menu is open
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.attributeName === 'class') {
+                const isOpen = document.body.classList.contains('menu-open');
+                if (isOpen) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
             }
         });
-        
-        // Close on escape
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
-                closeMobileMenu();
-            }
-        });
+    });
+    
+    observer.observe(document.body, { attributes: true });
+}
+
+function openMobileMenu() {
+    const navLinks = document.querySelector('.nav-links');
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    
+    if (navLinks && toggle) {
+        navLinks.classList.add('active');
+        toggle.classList.add('active');
+        document.body.classList.add('menu-open');
     }
 }
 
