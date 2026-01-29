@@ -403,7 +403,7 @@ function initContactForm() {
             const API_URL = window.location.hostname === 'localhost' || 
                            window.location.hostname === '127.0.0.1'
                 ? 'http://localhost:3000/api/contact'
-                : 'https://api.sharaywhiskandwillow.com/api/contact';
+                : 'https://sharaywhiskandwillow-backend.onrender.com/api/contact';
             
             const response = await fetch(API_URL, {
                 method: 'POST',
