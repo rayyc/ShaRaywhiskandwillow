@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    container_name: sharay-bakery-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=${MONGODB_URI}
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - NOTIFICATION_EMAIL=${NOTIFICATION_EMAIL}
+    volumes:
+      - .:/app
+      - /app/node_modules
+    restart: unless-stopped
+
+networks:
+  bakery-network:
+    driver: bridge

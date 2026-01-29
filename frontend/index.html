@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ShaRay Whisk&Willow - Premium artisan bakery offering custom cakes, French pastries, sourdough breads, and gourmet desserts. Handcrafted with love by Sasha and Ray Charles.">
+    <meta name="keywords" content="bakery, custom cakes, pastries, artisan bread, sourdough, cupcakes, wedding cakes, Nairobi bakery">
+    <meta name="author" content="ShaRay Whisk&Willow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sharaywhiskandwillow.com">
+    <meta property="og:title" content="ShaRay Whisk&Willow - Artisan Bakery">
+    <meta property="og:description" content="Premium handcrafted baked goods made with passion and precision">
+    <meta property="og:image" content="https://sharaywhiskandwillow.com/images/logo.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://sharaywhiskandwillow.com">
+    <meta property="twitter:title" content="ShaRay Whisk&Willow - Artisan Bakery">
+    <meta property="twitter:description" content="Premium handcrafted baked goods made with passion and precision">
+    <meta property="twitter:image" content="https://sharaywhiskandwillow.com/images/logo.png">
+    
+    <title>ShaRay Whisk&Willow - Premium Artisan Bakery | Custom Cakes & Pastries</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header / Navigation -->
+    <header id="header">
+        <nav>
+            <div class="logo-container">
+                <img src="images/logo.png" alt="ShaRay Whisk&Willow Logo" class="logo-image">
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active" data-section="home">Home</a></li>
+                <li><a href="#gallery" class="nav-link" data-section="gallery">Gallery</a></li>
+                <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+                <li><a href="#reviews" class="nav-link" data-section="reviews">Reviews</a></li>
+                <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section (Homepage - Always Visible) -->
+    <section id="home" class="hero section-content active">
+        <div class="hero-content">
+            <div class="hero-logo">
+                <img src="images/logo.png" alt="ShaRay Whisk&Willow" class="hero-logo-image">
+            </div>
+            <div class="hero-tagline">Artisan Bakery</div>
+            <h1>ShaRay Whisk&Willow</h1>
+            <p>Where culinary artistry meets timeless elegance</p>
+            
+            <!-- Contact Information on Homepage -->
+            <div class="hero-contact-info">
+                <div class="hero-contact-item">
+                    <span class="contact-icon">📧</span>
+                    <a href="mailto:sashanjoki25@gmail.com">sashanjoki25@gmail.com</a>
+                </div>
+                <div class="hero-contact-item">
+                    <span class="contact-icon">📱</span>
+                    <a href="tel:+254746631771">+254 746 631 771</a> | 
+                    <a href="tel:+254111905436">+254 111 905 436</a>
+                </div>
+            </div>
+
+            <!-- Visit Us Section -->
+            <div class="hero-visit-us">
+                <h3>📍 Visit Us</h3>
+                <p><strong>Location:</strong> Nairobi, Kenya</p>
+                <p><strong>Hours:</strong></p>
+                <p>Monday - Saturday: 8:00 AM - 9:00 PM<br>
+                   Sunday: 9:00 AM - 4:00 PM</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="hero-buttons">
+                <button class="cta-button primary" data-navigate="contact">Place Your Order</button>
+                <button class="cta-button secondary" data-navigate="gallery">View Our Creations</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Section (Hidden Initially) -->
+    <section id="featured" class="featured-section section-content" style="display: none;">
+        <div class="container">
+            <div class="featured-grid">
+                <div class="featured-item">
+                    <div class="featured-icon">🏆</div>
+                    <h3>Award Winning</h3>
+                    <p>Recognized for excellence in artisan baking</p>
+                </div>
+                <div class="featured-item">
+                    <div class="featured-icon">🌾</div>
+                    <h3>Premium Ingredients</h3>
+                    <p>Only the finest locally-sourced materials</p>
+                </div>
+                <div class="featured-item">
+                    <div class="featured-icon">👨‍🍳</div>
+                    <h3>Expert Craftsmanship</h3>
+                    <p>Decades of combined baking expertise</p>
+                </div>
+                <div class="featured-item">
+                    <div class="featured-icon">💝</div>
+                    <h3>Made with Love</h3>
+                    <p>Every creation tells a unique story</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section (Hidden Initially) -->
+    <section id="gallery" class="section-content" style="display: none;">
+        <div class="container">
+            <h2>Our Creations</h2>
+            <div class="section-subtitle">Crafted to Perfection</div>
+            
+            <div class="gallery-filter">
+                <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+                <button class="filter-btn" data-filter="cakes" aria-pressed="false">Cakes</button>
+                <button class="filter-btn" data-filter="pastries" aria-pressed="false">Pastries</button>
+                <button class="filter-btn" data-filter="breads" aria-pressed="false">Breads</button>
+                <button class="filter-btn" data-filter="desserts" aria-pressed="false">Desserts</button>
+            </div>
+
+            <div class="gallery">
+                <div class="gallery-item" data-category="cakes">
+                    <div class="gallery-item-image">
+                        <div class="image-placeholder">🍰</div>
+                    </div>
+                    <div class="gallery-item-content">
+                        <h3>Bespoke Wedding Cakes</h3>
+                        <p>Exquisitely crafted multi-tier masterpieces that transform your special day into an unforgettable celebration.</p>
+                        <div class="item-price">From KSh 15,000</div>
+                        <button class="item-cta" data-navigate="contact">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="pastries">
+                    <div class="gallery-item-image">
+                        <div class="image-placeholder">🥐</div>
+                    </div>
+                    <div class="gallery-item-content">
+                        <h3>French Croissants</h3>
+                        <p>Delicate, buttery layers inspired by Parisian patisseries.</p>
+                        <div class="item-price">KSh 250 each</div>
+                        <button class="item-cta" data-navigate="contact">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="desserts">
+                    <div class="gallery-item-image">
+                        <div class="image-placeholder">🍪</div>
+                    </div>
+                    <div class="gallery-item-content">
+                        <h3>Artisan Cookie Collection</h3>
+                        <p>Handcrafted gourmet cookies in rotating seasonal flavors.</p>
+                        <div class="item-price">KSh 1,500 per dozen</div>
+                        <button class="item-cta" data-navigate="contact">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="breads">
+                    <div class="gallery-item-image">
+                        <div class="image-placeholder">🍞</div>
+                    </div>
+                    <div class="gallery-item-content">
+                        <h3>Artisan Sourdough</h3>
+                        <p>Naturally leavened breads with perfectly crisp crusts.</p>
+                        <div class="item-price">KSh 800 per loaf</div>
+                        <button class="item-cta" data-navigate="contact">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="desserts">
+                    <div class="gallery-item-image">
+                        <div class="image-placeholder">🧁</div>
+                    </div>
+                    <div class="gallery-item-content">
+                        <h3>Luxury Cupcakes</h3>
+                        <p>Miniature works of art crowned with our signature Swiss meringue buttercream.</p>
+                        <div class="item-price">KSh 300 each</div>
+                        <button class="item-cta" data-navigate="contact">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="desserts">
+                    <div class="gallery-item-image">
+                        <div class="image-placeholder">🥧</div>
+                    </div>
+                    <div class="gallery-item-content">
+                        <h3>Seasonal Fruit Pies</h3>
+                        <p>Farm-fresh seasonal pies featuring locally-sourced fruits.</p>
+                        <div class="item-price">KSh 2,500 whole pie</div>
+                        <button class="item-cta" data-navigate="contact">Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section (Hidden Initially) -->
+    <section id="about" class="section-content" style="display: none;">
+        <div class="container">
+            <h2>Our Story</h2>
+            <div class="section-subtitle">Meet the Artisans Behind the Magic</div>
+            
+            <div class="about-content">
+                <div class="about-intro">
+                    <p>Welcome to ShaRay Whisk&Willow, where passion, precision, and artistry converge in every creation.</p>
+                    <p>What began as a shared dream in a small kitchen has blossomed into Nairobi's premier destination for luxury baked goods.</p>
+                </div>
+
+                <div class="bakers">
+                    <div class="baker">
+                        <div class="baker-icon">👩‍🍳</div>
+                        <h3>Sasha</h3>
+                        <p class="baker-title">Master Pastry Chef & Co-Founder</p>
+                        <p>With over a decade of experience in fine dining and luxury patisserie, Sasha brings artistry and innovation to every creation.</p>
+                        <div class="baker-specialties">
+                            <span>Custom Cakes</span>
+                            <span>French Pastries</span>
+                            <span>Sugar Art</span>
+                        </div>
+                    </div>
+
+                    <div class="baker">
+                        <div class="baker-icon">👨‍🍳</div>
+                        <h3>Ray Charles</h3>
+                        <p class="baker-title">Artisan Baker & Co-Founder</p>
+                        <p>Ray Charles is a master of traditional European bread-making, with specialized training in artisan sourdough.</p>
+                        <div class="baker-specialties">
+                            <span>Sourdough Bread</span>
+                            <span>Laminated Doughs</span>
+                            <span>European Techniques</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="values">
+                    <h3>Our Values</h3>
+                    <div class="values-grid">
+                        <div class="value-item">
+                            <h4>Quality First</h4>
+                            <p>We source only premium ingredients from trusted suppliers</p>
+                        </div>
+                        <div class="value-item">
+                            <h4>Sustainability</h4>
+                            <p>Committed to eco-friendly practices</p>
+                        </div>
+                        <div class="value-item">
+                            <h4>Innovation</h4>
+                            <p>Exploring new techniques while honoring traditions</p>
+                        </div>
+                        <div class="value-item">
+                            <h4>Community</h4>
+                            <p>Building relationships, one creation at a time</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section (Hidden Initially - Changed from Testimonials) -->
+    <section id="reviews" class="testimonials-section section-content" style="display: none;">
+        <div class="container">
+            <h2>What Our Clients Say</h2>
+            <div class="section-subtitle">Reviews from Happy Customers</div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"ShaRay created our dream wedding cake! Absolutely phenomenal!"</p>
+                    <div class="testimonial-author">
+                        <strong>Amara & James</strong>
+                        <span>Wedding Clients, 2025</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"I order their sourdough every week. Ray truly is a master craftsman."</p>
+                    <div class="testimonial-author">
+                        <strong>Patricia M.</strong>
+                        <span>Regular Customer</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"The attention to detail is incredible. Professional and delicious!"</p>
+                    <div class="testimonial-author">
+                        <strong>David K.</strong>
+                        <span>Corporate Client</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section (Hidden Initially) -->
+    <section id="contact" class="section-content" style="display: none;">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <div class="section-subtitle">Let's Create Something Special Together</div>
+            
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h3>Visit Us</h3>
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div>
+                            <strong>Location</strong>
+                            <p>Nairobi, Kenya</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">📧</div>
+                        <div>
+                            <strong>Email</strong>
+                            <p><a href="mailto:sashanjoki25@gmail.com">sashanjoki25@gmail.com</a></p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">📱</div>
+                        <div>
+                            <strong>Phone</strong>
+                            <p><a href="tel:+254746631771">+254 746 631 771</a>, <a href="tel:+254111905436">+254 111 905 436</a></p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">🕐</div>
+                        <div>
+                            <strong>Hours</strong>
+                            <p>Monday - Saturday: 8:00 AM - 9:00 PM<br>
+                            Sunday: 9:00 AM - 4:00 PM</p>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <h4>Follow Us</h4>
+                        <div class="social-icons">
+                            <a href="#" aria-label="Instagram">📷</a>
+                            <a href="#" aria-label="Facebook">📘</a>
+                            <a href="#" aria-label="Twitter">🐦</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <p class="form-description">Have a custom order in mind? Fill out the form below.</p>
+                    
+                    <div id="successMessage" class="success-message"></div>
+                    <div id="errorMessage" class="error-message"></div>
+                    
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name <span class="required">*</span></label>
+                            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+254 712 345 678">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="orderType">Order Type</label>
+                            <select id="orderType" name="orderType">
+                                <option value="">Select order type</option>
+                                <option value="wedding-cake">Wedding Cake</option>
+                                <option value="birthday-cake">Birthday Cake</option>
+                                <option value="pastries">Pastries</option>
+                                <option value="bread">Bread</option>
+                                <option value="corporate">Corporate Order</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Your Message <span class="required">*</span></label>
+                            <textarea id="message" name="message" rows="5" placeholder="Tell us about your vision..." required minlength="10"></textarea>
+                            <div id="messageCharCounter" class="char-counter">
+                                <span id="charCount">0</span> / 10 characters 
+                                <span id="charStatus" class="char-status">(minimum 10 required)</span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <span class="btn-text">Send Message</span>
+                            <span class="loading-spinner" style="display: none; opacity: 0;">⏳</span>
+                            <span class="sent-text" style="display: none; opacity: 0;">✓ Sent</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="images/logo.png" alt="ShaRay Whisk&Willow" class="footer-logo">
+                    <p>Handcrafted excellence in every bite.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><button class="footer-link" data-navigate="gallery">Our Menu</button></li>
+                        <li><button class="footer-link" data-navigate="about">About Us</button></li>
+                        <li><button class="footer-link" data-navigate="reviews">Reviews</button></li>
+                        <li><button class="footer-link" data-navigate="contact">Contact</button></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe for seasonal specials</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; <span data-current-year>2026</span> ShaRay Whisk&Willow. Handcrafted with passion by Sasha and Ray Charles.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

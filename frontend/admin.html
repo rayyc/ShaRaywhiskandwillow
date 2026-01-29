@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - ShaRay Whisk&Willow</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #D4AF37;
+            --secondary-gold: #C9A961;
+            --dark-bg: #1A1A2E;
+            --darker-bg: #2D2D2D;
+            --light-gray: #f5f5f5;
+            --white: #ffffff;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --danger: #f44336;
+            --info: #2196F3;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--light-gray);
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--dark-bg), var(--darker-bg));
+            color: var(--white);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+
+        .logout-btn {
+            padding: 0.6rem 1.2rem;
+            background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 1.8rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--primary-gold);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+
+        .stat-card h3 {
+            font-size: 2.8rem;
+            color: var(--primary-gold);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .stat-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .stat-card .stat-icon {
+            font-size: 2rem;
+            color: var(--primary-gold);
+            margin-bottom: 1rem;
+        }
+
+        /* Controls */
+        .controls {
+            background: var(--white);
+            padding: 1.8rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 280px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.9rem 1.2rem 0.9rem 3rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: var(--light-gray);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.6rem;
+            background: var(--white);
+            border: 2px solid var(--primary-gold);
+            color: var(--dark-bg);
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+            color: var(--white);
+            border-color: var(--primary-gold);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 0.8rem 1.6rem;
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .refresh-btn {
+            background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+        }
+
+        .export-btn {
+            background: linear-gradient(135deg, var(--success), #45a049);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Table Styles */
+        .table-container {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: linear-gradient(135deg, var(--dark-bg), var(--darker-bg));
+            color: var(--white);
+        }
+
+        th {
+            padding: 1.3rem 1.2rem;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        th.sortable {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        th.sortable:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        th i {
+            margin-left: 5px;
+            opacity: 0.6;
+        }
+
+        td {
+            padding: 1.2rem;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: middle;
+        }
+
+        tr:hover {
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        /* Status Badges */
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: inline-block;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .status-new {
+            background: var(--primary-gold);
+            color: var(--white);
+        }
+
+        .status-read {
+            background: var(--success);
+            color: var(--white);
+        }
+
+        .status-replied {
+            background: var(--info);
+            color: var(--white);
+        }
+
+        .status-archived {
+            background: #9E9E9E;
+            color: var(--white);
+        }
+
+        /* Message Cell */
+        .message-cell {
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .message-cell:hover {
+            white-space: normal;
+            overflow: visible;
+            position: relative;
+            z-index: 10;
+            background: var(--white);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            max-width: 400px;
+        }
+
+        /* Action Buttons in Table */
+        .table-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .table-btn {
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .view-btn {
+            background: var(--info);
+            color: var(--white);
+        }
+
+        .delete-btn {
+            background: var(--danger);
+            color: var(--white);
+        }
+
+        .table-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 4rem;
+            color: var(--text-light);
+        }
+
+        .spinner {
+            border: 4px solid rgba(212, 175, 55, 0.2);
+            border-top: 4px solid var(--primary-gold);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* No Data */
+        .no-data {
+            text-align: center;
+            padding: 4rem;
+            color: var(--text-light);
+        }
+
+        .no-data i {
+            font-size: 3rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            gap: 1rem;
+            background: var(--white);
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .pagination-btn {
+            padding: 0.6rem 1.2rem;
+            background: var(--light-gray);
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pagination-btn:hover:not(:disabled) {
+            background: var(--primary-gold);
+            color: var(--white);
+            border-color: var(--primary-gold);
+        }
+
+        .pagination-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .page-info {
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            overflow: auto;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: var(--white);
+            margin: 3% auto;
+            padding: 2.5rem;
+            width: 90%;
+            max-width: 700px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-modal {
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--dark-bg);
+        }
+
+        .modal-field {
+            margin-bottom: 1.8rem;
+            padding-bottom: 1.8rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .modal-field:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .modal-field label {
+            display: block;
+            font-weight: 600;
+            color: var(--primary-gold);
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .modal-field p {
+            color: var(--text-dark);
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+        .modal-field a {
+            color: var(--primary-gold);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .modal-field a:hover {
+            text-decoration: underline;
+        }
+
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            color: var(--white);
+            font-weight: 600;
+            z-index: 1000;
+            animation: slideInRight 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .toast-success {
+            background: linear-gradient(135deg, var(--success), #45a049);
+        }
+
+        .toast-error {
+            background: linear-gradient(135deg, var(--danger), #e53935);
+        }
+
+        .toast-warning {
+            background: linear-gradient(135deg, var(--warning), #f57c00);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .logout-btn {
+                align-self: flex-start;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            th, td {
+                padding: 1rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .modal-content {
+                margin: 10% auto;
+                padding: 1.5rem;
+                width: 95%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .stat-card {
+                padding: 1.5rem;
+            }
+            
+            .stat-card h3 {
+                font-size: 2.2rem;
+            }
+            
+            .filter-buttons {
+                justify-content: center;
+            }
+            
+            .action-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <h1><i class="fas fa-chart-line"></i> Admin Dashboard</h1>
+                <p>ShaRay Whisk&Willow - Contact Submissions Management</p>
+            </div>
+            <button class="logout-btn" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Statistics -->
+        <div class="stats-grid" id="stats">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 id="totalCount">0</h3>
+                <p>Total Contacts</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-calendar-day"></i>
+                </div>
+                <h3 id="todayCount">0</h3>
+                <p>Today</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3 id="newCount">0</h3>
+                <p>Unread</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 id="weekCount">0</h3>
+                <p>This Week</p>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="Search by name, email, phone, or message..." 
+                    onkeyup="debouncedSearch()"
+                >
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="setFilter('all')">
+                    <i class="fas fa-list"></i> All
+                </button>
+                <button class="filter-btn" onclick="setFilter('new')">
+                    <i class="fas fa-envelope"></i> New
+                </button>
+                <button class="filter-btn" onclick="setFilter('read')">
+                    <i class="fas fa-eye"></i> Read
+                </button>
+                <button class="filter-btn" onclick="setFilter('replied')">
+                    <i class="fas fa-reply"></i> Replied
+                </button>
+                <button class="filter-btn" onclick="setFilter('archived')">
+                    <i class="fas fa-archive"></i> Archived
+                </button>
+            </div>
+            <div class="action-buttons">
+                <button class="action-btn refresh-btn" onclick="loadContacts()">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+                <button class="action-btn export-btn" onclick="exportToCSV()">
+                    <i class="fas fa-download"></i> Export CSV
+                </button>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Loading contacts...</p>
+        </div>
+
+        <!-- Table -->
+        <div id="tableContainer" class="table-container" style="display: none;">
+            <table id="contactsTable">
+                <thead>
+                    <tr>
+                        <th class="sortable" onclick="sortTable('createdAt')">
+                            Date & Time <i class="fas fa-sort"></i>
+                        </th>
+                        <th class="sortable" onclick="sortTable('name')">
+                            Name <i class="fas fa-sort"></i>
+                        </th>
+                        <th class="sortable" onclick="sortTable('email')">
+                            Email <i class="fas fa-sort"></i>
+                        </th>
+                        <th>Phone</th>
+                        <th class="sortable" onclick="sortTable('orderType')">
+                            Order Type <i class="fas fa-sort"></i>
+                        </th>
+                        <th>Message</th>
+                        <th class="sortable" onclick="sortTable('status')">
+                            Status <i class="fas fa-sort"></i>
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="contactsBody">
+                    <!-- Data will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div id="pagination" class="pagination" style="display: none;">
+            <button class="pagination-btn" onclick="changePage(-1)" id="prevBtn">
+                <i class="fas fa-chevron-left"></i> Previous
+            </button>
+            <span class="page-info" id="pageInfo">Page 1 of 1</span>
+            <button class="pagination-btn" onclick="changePage(1)" id="nextBtn">
+                Next <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal for viewing full contact -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 style="color: var(--primary-gold); margin-bottom: 2rem; display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-user-circle"></i> Contact Details
+            </h2>
+            <div id="modalContent"></div>
+            <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #f0f0f0;">
+                <button class="action-btn refresh-btn" onclick="markAsRead()" id="markReadBtn">
+                    <i class="fas fa-check-circle"></i> Mark as Read
+                </button>
+                <button class="action-btn" style="background: var(--danger);" onclick="deleteContact()" id="deleteBtn">
+                    <i class="fas fa-trash-alt"></i> Delete Contact
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'http://localhost:3000/api'
+            : 'https://api.sharaywhiskandwillow.com/api';
+
+        // State management
+        let allContacts = [];
+        let filteredContacts = [];
+        let currentPage = 1;
+        let itemsPerPage = 20;
+        let totalPages = 1;
+        let currentFilter = 'all';
+        let currentSort = { field: 'createdAt', order: 'desc' };
+        let currentSearch = '';
+        let selectedContactId = null;
+        let currentStats = null;
+
+        // Load contacts on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadContacts();
+            setInterval(loadStats, 30000); // Refresh stats every 30 seconds
+        });
+
+        // Toast notification system
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.textContent = message;
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                color: white;
+                font-weight: 600;
+                z-index: 1000;
+                animation: slideInRight 0.3s ease;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            `;
+
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.animation = 'slideInRight 0.3s ease reverse';
+                setTimeout(() => toast.remove(), 300);
+            }, 5000);
+        }
+
+        // Debounced search function
+        let searchTimeout;
+        function debouncedSearch() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                currentSearch = document.getElementById('searchInput').value;
+                currentPage = 1;
+                applyFilters();
+            }, 300);
+        }
+
+        // Load contacts with pagination
+        async function loadContacts() {
+            const loading = document.getElementById('loading');
+            const tableContainer = document.getElementById('tableContainer');
+            const pagination = document.getElementById('pagination');
+            
+            try {
+                loading.style.display = 'block';
+                tableContainer.style.display = 'none';
+                pagination.style.display = 'none';
+                
+                // Fetch contacts with pagination
+                const response = await fetch(`${API_BASE}/contacts?page=${currentPage}&limit=${itemsPerPage}&status=${currentFilter === 'all' ? '' : currentFilter}&search=${currentSearch}&sortBy=${currentSort.field}&sortOrder=${currentSort.order}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    allContacts = data.data;
+                    totalPages = data.pagination.totalPages;
+                    
+                    displayContacts(allContacts);
+                    updatePagination(data.pagination);
+                    
+                    tableContainer.style.display = 'block';
+                    pagination.style.display = 'flex';
+                    
+                    // Load stats separately
+                    loadStats();
+                    
+                    showToast(`Loaded ${data.pagination.total} contacts`, 'success');
+                } else {
+                    throw new Error(data.error || 'Failed to load contacts');
+                }
+                
+            } catch (error) {
+                console.error('Error loading contacts:', error);
+                loading.innerHTML = `
+                    <div style="color: #f44336; text-align: center;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                        <p style="font-size: 1.1rem; margin-bottom: 1rem;">❌ Error loading contacts</p>
+                        <p style="margin-bottom: 1.5rem; color: #666;">${error.message}</p>
+                        <button onclick="loadContacts()" style="padding: 0.8rem 1.5rem; background: var(--primary-gold); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: 600;">
+                            <i class="fas fa-redo"></i> Retry
+                        </button>
+                    </div>
+                `;
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+
+        // Load statistics
+        async function loadStats() {
+            try {
+                const response = await fetch(`${API_BASE}/contacts/stats`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    currentStats = data.data;
+                    updateStatsDisplay();
+                }
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+
+        // Update statistics display
+        function updateStatsDisplay() {
+            if (!currentStats) return;
+            
+            const stats = currentStats;
+            
+            document.getElementById('totalCount').textContent = 
+                stats.totalContacts?.[0]?.count || 0;
+            document.getElementById('newCount').textContent = 
+                stats.byStatus?.find(s => s._id === 'new')?.count || 0;
+            
+            // Calculate today's count
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const todayCount = stats.recentSubmissions?.filter(c => 
+                new Date(c.createdAt) >= today
+            ).length || 0;
+            document.getElementById('todayCount').textContent = todayCount;
+            
+            // Calculate this week's count
+            const weekAgo = new Date();
+            weekAgo.setDate(weekAgo.getDate() - 7);
+            const weekCount = stats.recentSubmissions?.filter(c => 
+                new Date(c.createdAt) >= weekAgo
+            ).length || 0;
+            document.getElementById('weekCount').textContent = weekCount;
+        }
+
+        // Display contacts in table
+        function displayContacts(contacts) {
+            const tbody = document.getElementById('contactsBody');
+            
+            if (contacts.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8" class="no-data">
+                            <i class="fas fa-inbox"></i>
+                            <p style="margin-top: 1rem; font-size: 1.1rem;">No contacts found</p>
+                            ${currentSearch ? `<p style="color: #666; margin-top: 0.5rem;">Try a different search term</p>` : ''}
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            const html = contacts.map(contact => `
+                <tr data-id="${contact._id}">
+                    <td>
+                        <div style="font-weight: 600; color: var(--dark-bg);">${formatDate(contact.createdAt)}</div>
+                        <div style="font-size: 0.85rem; color: var(--text-light);">${formatTime(contact.createdAt)}</div>
+                    </td>
+                    <td><strong>${escapeHtml(contact.name)}</strong></td>
+                    <td>
+                        <a href="mailto:${contact.email}" style="color: var(--primary-gold); text-decoration: none; font-weight: 600;">
+                            ${contact.email}
+                        </a>
+                    </td>
+                    <td>${contact.phone ? `<a href="tel:${contact.phone}" style="color: var(--text-dark); text-decoration: none;">${contact.phone}</a>` : 'N/A'}</td>
+                    <td>
+                        ${contact.orderType ? `
+                            <span style="display: inline-block; padding: 0.3rem 0.8rem; background: rgba(212, 175, 55, 0.1); color: var(--primary-gold); border-radius: 4px; font-size: 0.85rem; font-weight: 600;">
+                                ${formatOrderType(contact.orderType)}
+                            </span>
+                        ` : 'N/A'}
+                    </td>
+                    <td class="message-cell" title="${escapeHtml(contact.message)}">
+                        ${truncateText(contact.message, 60)}
+                    </td>
+                    <td>
+                        <span class="status-badge status-${contact.status}">
+                            ${contact.status}
+                        </span>
+                    </td>
+                    <td class="table-actions">
+                        <button class="table-btn view-btn" onclick='viewContact("${contact._id}")'>
+                            <i class="fas fa-eye"></i> View
+                        </button>
+                        <button class="table-btn delete-btn" onclick='deleteContactPrompt("${contact._id}")'>
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+            
+            tbody.innerHTML = html;
+        }
+
+        // Format order type for display
+        function formatOrderType(type) {
+            const types = {
+                'wedding-cake': 'Wedding',
+                'birthday-cake': 'Birthday',
+                'pastries': 'Pastries',
+                'bread': 'Bread',
+                'corporate': 'Corporate',
+                'custom': 'Custom',
+                'other': 'Other',
+                '': 'General'
+            };
+            return types[type] || type;
+        }
+
+        // Format date and time
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const options = { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric'
+            };
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        function formatTime(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: true 
+            });
+        }
+
+        // Set filter and reload data
+        function setFilter(status) {
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            currentFilter = status;
+            currentPage = 1;
+            loadContacts();
+        }
+
+        // Apply filters to local data
+        function applyFilters() {
+            let results = [...allContacts];
+            
+            // Apply search filter
+            if (currentSearch) {
+                const query = currentSearch.toLowerCase();
+                results = results.filter(c =>
+                    c.name.toLowerCase().includes(query) ||
+                    c.email.toLowerCase().includes(query) ||
+                    (c.phone && c.phone.includes(query)) ||
+                    c.message.toLowerCase().includes(query)
+                );
+            }
+            
+            // Apply status filter
+            if (currentFilter !== 'all') {
+                results = results.filter(c => c.status === currentFilter);
+            }
+            
+            // Sort results
+            results.sort((a, b) => {
+                const field = currentSort.field;
+                const order = currentSort.order === 'asc' ? 1 : -1;
+                
+                if (a[field] < b[field]) return -1 * order;
+                if (a[field] > b[field]) return 1 * order;
+                return 0;
+            });
+            
+            filteredContacts = results;
+            displayContacts(filteredContacts);
+        }
+
+        // Sort table
+        function sortTable(field) {
+            if (currentSort.field === field) {
+                currentSort.order = currentSort.order === 'asc' ? 'desc' : 'asc';
+            } else {
+                currentSort.field = field;
+                currentSort.order = 'desc';
+            }
+            
+            // Update sort indicators
+            document.querySelectorAll('th i').forEach(icon => {
+                icon.className = 'fas fa-sort';
+            });
+            
+            const currentIcon = event.target.querySelector('i') || event.target.parentElement.querySelector('i');
+            if (currentIcon) {
+                currentIcon.className = currentSort.order === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down';
+            }
+            
+            loadContacts();
+        }
+
+        // Update pagination controls
+        function updatePagination(pagination) {
+            document.getElementById('pageInfo').textContent = 
+                `Page ${pagination.page} of ${pagination.totalPages}`;
+            
+            document.getElementById('prevBtn').disabled = !pagination.hasPrevPage;
+            document.getElementById('nextBtn').disabled = !pagination.hasNextPage;
+        }
+
+        // Change page
+        function changePage(delta) {
+            const newPage = currentPage + delta;
+            
+            if (newPage >= 1 && newPage <= totalPages) {
+                currentPage = newPage;
+                loadContacts();
+                
+                // Scroll to top of table
+                document.querySelector('.table-container').scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+            }
+        }
+
+        // View contact details
+        async function viewContact(id) {
+            try {
+                const response = await fetch(`${API_BASE}/contact/${id}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    selectedContactId = id;
+                    const contact = data.data;
+                    
+                    const modalContent = document.getElementById('modalContent');
+                    modalContent.innerHTML = `
+                        <div class="modal-field">
+                            <label><i class="fas fa-user"></i> Name</label>
+                            <p>${escapeHtml(contact.name)}</p>
+                        </div>
+                        <div class="modal-field">
+                            <label><i class="fas fa-envelope"></i> Email</label>
+                            <p><a href="mailto:${contact.email}">${contact.email}</a></p>
+                        </div>
+                        <div class="modal-field">
+                            <label><i class="fas fa-phone"></i> Phone</label>
+                            <p>${contact.phone ? `<a href="tel:${contact.phone}">${contact.phone}</a>` : 'Not provided'}</p>
+                        </div>
+                        <div class="modal-field">
+                            <label><i class="fas fa-birthday-cake"></i> Order Type</label>
+                            <p>${contact.orderType ? formatOrderType(contact.orderType) : 'Not specified'}</p>
+                        </div>
+                        <div class="modal-field">
+                            <label><i class="fas fa-comment"></i> Message</label>
+                            <p style="white-space: pre-wrap; background: #f9f9f9; padding: 1rem; border-radius: 6px;">${escapeHtml(contact.message)}</p>
+                        </div>
+                        <div class="modal-field">
+                            <label><i class="fas fa-calendar"></i> Submitted</label>
+                            <p>${formatDate(contact.createdAt)} at ${formatTime(contact.createdAt)}</p>
+                        </div>
+                        <div class="modal-field">
+                            <label><i class="fas fa-info-circle"></i> Status</label>
+                            <p><span class="status-badge status-${contact.status}">${contact.status}</span></p>
+                        </div>
+                        ${contact.ipAddress ? `
+                            <div class="modal-field">
+                                <label><i class="fas fa-globe"></i> Additional Info</label>
+                                <p style="font-size: 0.9rem; color: var(--text-light);">
+                                    IP: ${contact.ipAddress}<br>
+                                    ${contact.referrer ? `Referrer: ${contact.referrer}` : ''}
+                                </p>
+                            </div>
+                        ` : ''}
+                    `;
+                    
+                    document.getElementById('contactModal').style.display = 'block';
+                    
+                    // Update action buttons based on status
+                    const markReadBtn = document.getElementById('markReadBtn');
+                    if (contact.status === 'new') {
+                        markReadBtn.style.display = 'inline-flex';
+                    } else {
+                        markReadBtn.style.display = 'none';
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading contact:', error);
+                showToast('Error loading contact details', 'error');
+            }
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('contactModal').style.display = 'none';
+            selectedContactId = null;
+        }
+
+        // Mark contact as read
+        async function markAsRead() {
+            if (!selectedContactId) return;
+            
+            try {
+                const response = await fetch(`${API_BASE}/contact/${selectedContactId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ status: 'read' })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showToast('Contact marked as read', 'success');
+                    closeModal();
+                    loadContacts();
+                }
+            } catch (error) {
+                console.error('Error updating contact:', error);
+                showToast('Error updating contact', 'error');
+            }
+        }
+
+        // Delete contact prompt
+        function deleteContactPrompt(id) {
+            if (confirm('Are you sure you want to delete this contact? This action cannot be undone.')) {
+                deleteContact(id);
+            }
+        }
+
+        // Delete contact
+        async function deleteContact(id = null) {
+            const contactId = id || selectedContactId;
+            if (!contactId) return;
+            
+            try {
+                const response = await fetch(`${API_BASE}/contact/${contactId}`, {
+                    method: 'DELETE'
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showToast('Contact deleted successfully', 'success');
+                    
+                    if (id) {
+                        // Remove from table
+                        const row = document.querySelector(`tr[data-id="${id}"]`);
+                        if (row) row.remove();
+                        
+                        // Reload stats
+                        loadStats();
+                    } else {
+                        closeModal();
+                        loadContacts();
+                    }
+                }
+            } catch (error) {
+                console.error('Error deleting contact:', error);
+                showToast('Error deleting contact', 'error');
+            }
+        }
+
+        // Export to CSV
+        function exportToCSV() {
+            const contactsToExport = filteredContacts.length > 0 ? filteredContacts : allContacts;
+            
+            if (contactsToExport.length === 0) {
+                showToast('No data to export', 'warning');
+                return;
+            }
+            
+            const headers = ['Date', 'Time', 'Name', 'Email', 'Phone', 'Order Type', 'Message', 'Status'];
+            
+            const csvContent = [
+                headers,
+                ...contactsToExport.map(c => [
+                    formatDate(c.createdAt),
+                    formatTime(c.createdAt),
+                    `"${c.name.replace(/"/g, '""')}"`,
+                    c.email,
+                    c.phone || '',
+                    c.orderType || '',
+                    `"${c.message.replace(/"/g, '""')}"`,
+                    c.status
+                ])
+            ].map(row => row.join(',')).join('\n');
+            
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `sharay-contacts-${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            
+            showToast(`Exported ${contactsToExport.length} contacts to CSV`, 'success');
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('adminToken');
+                window.location.href = '/';
+            }
+        }
+
+        // Utility functions
+        function truncateText(text, maxLength) {
+            if (text.length <= maxLength) return escapeHtml(text);
+            return escapeHtml(text.substring(0, maxLength)) + '...';
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('contactModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+            
+            if (e.key === 'r' && e.ctrlKey) {
+                e.preventDefault();
+                loadContacts();
+            }
+            
+            if (e.key === 'f' && e.ctrlKey) {
+                e.preventDefault();
+                document.getElementById('searchInput').focus();
+            }
+        });
+
+        // Initialize with a welcome message
+        setTimeout(() => {
+            console.log('%c🍰 Admin Dashboard Loaded', 'font-size: 18px; color: #D4AF37; font-weight: bold;');
+            console.log('%cShaRay Whisk&Willow - Contact Management System', 'color: #C9A961;');
+        }, 1000);
+    </script>
+</body>
+</html>
