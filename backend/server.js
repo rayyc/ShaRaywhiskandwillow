@@ -14,15 +14,16 @@ const allowedOrigins = [
   'http://127.0.0.1:8080',
   'http://192.168.100.21:8080',
   'http://localhost:3000',
-  'http://127.0.0.1:3000'
+  'http://127.0.0.1:3000',
+  'https://sharaywhiskandwillow.netlify.app'
 ];
 
 // Add environment variable origins if specified
 if (process.env.FRONTEND_URL) {
   const envOrigins = process.env.FRONTEND_URL.split(',');
   envOrigins.forEach(origin => {
-    if (origin && !allowedOrigins.includes(origin.trim())) {
-      allowedOrigins.push(origin.trim());
+    if (trimmedOrigin && !allowedOrigins.includes(trimmedOrigin)) {
+      allowedOrigins.push(trimmedOrigin);
     }
   });
 }
@@ -368,7 +369,7 @@ async function sendEmailNotification(data, req) {
                 <div class="footer">
                     <p>This email was automatically generated from your website contact form.</p>
                     <p style="margin-top: 10px;">
-                        <a href="http://localhost:8080/admin.html" style="color: #D4AF37; text-decoration: none;">
+                        <a href="${process.env.FRONTEND_URL || 'https://sharaywhiskandwillow.netlify.app'}/admin.html" style="color: #D4AF37; text-decoration: none;">
                             👨‍💻 View in Admin Dashboard
                         </a>
                     </p>
